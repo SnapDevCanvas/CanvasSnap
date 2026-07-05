@@ -1,9 +1,9 @@
 --- a/paper-server/build.gradle.kts
 +++ b/paper-server/build.gradle.kts
-@@ -2,12 +_,13 @@
- import io.papermc.paperweight.attribute.DevBundleOutput
- import io.papermc.paperweight.util.*
- import java.time.Instant
+@@ -6,12 +_,13 @@
+ import java.util.zip.ZipEntry
+ import java.util.zip.ZipInputStream
+ import java.util.zip.ZipOutputStream
 +import io.papermc.paperweight.tasks.MergeAccessTransforms
  
  plugins {
@@ -15,8 +15,8 @@
      id("io.papermc.fill.gradle") version "1.0.12"
  }
  
-@@ -18,12 +_,31 @@
-     paperclip("io.papermc:paperclip:3.0.4")
+@@ -76,12 +_,31 @@
+     mache.setFrom(files(normalizedMache))
  }
  
 +val mergeMinecraftATs by tasks.registering<MergeAccessTransforms> {
@@ -26,10 +26,9 @@
 +
  paperweight {
      minecraftVersion = providers.gradleProperty("mcVersion")
--    gitFilePatches = false
 +    filterPatches = false
-+    gitFilePatches = true
-+
+     gitFilePatches = false
+ 
 +    val canvas = forks.register("canvas") {
 +        additionalAts.set(mergeMinecraftATs.flatMap { it.outputFile })
 +        upstream.patchDir("paperServer") {
@@ -41,14 +40,15 @@
 +    }
 +
 +    activeFork = canvas
- 
++
      updatingMinecraft {
-         // oldPaperCommit = "d4fe85375af18bfa88f44d7c1e6a61904ae550cc"
+-        oldPaperCommit = "d4fe85375af18bfa88f44d7c1e6a61904ae550cc"
++        // oldPaperCommit = "d4fe85375af18bfa88f44d7c1e6a61904ae550cc"
 +        oldForkCommit = "4920e9860aee81d084d52b830c967aa208dd09c6"
      }
  }
  
-@@ -86,7 +_,19 @@
+@@ -144,7 +_,19 @@
      }
  }
  
@@ -69,7 +69,7 @@
  configurations.named(log4jPlugins.compileClasspathConfigurationName) {
      extendsFrom(configurations.compileClasspath.get())
  }
-@@ -109,12 +_,14 @@
+@@ -167,12 +_,14 @@
  }
  
  dependencies {
@@ -87,7 +87,7 @@
  
      /*
        Required to add the missing Log4j2Plugins.dat file from log4j-core
-@@ -138,7 +_,10 @@
+@@ -196,7 +_,10 @@
      // Deps that were previously in the API but have now been moved here for backwards compat, eventually to be removed
      runtimeOnly("commons-lang:commons-lang:2.6")
      runtimeOnly("org.xerial:sqlite-jdbc:3.49.1.0")
@@ -99,7 +99,7 @@
      runtimeOnly("com.lmax:disruptor:3.4.4")
      implementation("com.googlecode.json-simple:json-simple:1.1.1") { // change to runtimeOnly once Timings is removed
          isTransitive = false // includes junit
-@@ -148,7 +_,7 @@
+@@ -206,7 +_,7 @@
      testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.0.3")
      testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
      testImplementation("org.junit.platform:junit-platform-suite-engine:6.0.3")
@@ -108,7 +108,7 @@
      testImplementation("org.mockito:mockito-core:5.22.0")
      mockitoAgent("org.mockito:mockito-core:5.22.0") { isTransitive = false } // Configure mockito agent that is needed in newer java versions
      testImplementation("org.ow2.asm:asm-tree:9.9.1")
-@@ -171,14 +_,16 @@
+@@ -229,14 +_,16 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
@@ -130,7 +130,7 @@
              "Build-Number" to (build ?: ""),
              "Build-Time" to buildTime.toString(),
              "Git-Branch" to gitBranch,
-@@ -264,17 +_,18 @@
+@@ -322,17 +_,18 @@
      javaLauncher.set(project.javaToolchains.launcherFor {
          languageVersion.set(JavaLanguageVersion.of(25))
          // TODO - JB runtime 25 has issues with spark rn
@@ -156,7 +156,7 @@
      systemProperty("net.kyori.adventure.text.warnWhenLegacyFormattingDetected", true)
      if (providers.gradleProperty("paper.runDisableWatchdog").getOrElse("false") == "true") {
          systemProperty("disable.watchdog", true)
-@@ -282,8 +_,8 @@
+@@ -340,8 +_,8 @@
      systemProperty("io.papermc.paper.suppress.sout.nags", true)
      systemProperty("paper.maxChatCommandInputSize", 32767)
  
@@ -167,7 +167,7 @@
      maxHeapSize = "${memoryGb}G"
  
      doFirst {
-@@ -315,7 +_,7 @@
+@@ -373,7 +_,7 @@
      mainClass.set(null as String?)
  }
  
@@ -176,7 +176,7 @@
      project("paper")
      versionFamily(paperweight.minecraftVersion.map { it.split(".", "-").takeWhile { part -> part.toIntOrNull() != null }.take(2).joinToString(".") })
      version(paperweight.minecraftVersion)
-@@ -330,4 +_,4 @@
+@@ -388,4 +_,4 @@
              }
          }
      }
