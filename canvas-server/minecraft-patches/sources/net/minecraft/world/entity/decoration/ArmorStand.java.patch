@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/decoration/ArmorStand.java b/net/minecraft/world/entity/decoration/ArmorStand.java
+index 9e4293c6df1851a852423b469577388d2254e169..e786fa71c4b4804aa4b032796953eedd6f937107 100644
 --- a/net/minecraft/world/entity/decoration/ArmorStand.java
 +++ b/net/minecraft/world/entity/decoration/ArmorStand.java
-@@ -206,6 +_,7 @@
+@@ -206,6 +206,7 @@ public class ArmorStand extends LivingEntity {
  
      @Override
      protected void pushEntities() {
@@ -8,7 +16,7 @@
          if (!this.level().paperConfig().entities.armorStands.doCollisionEntityLookups) return; // Paper - Option to prevent armor stands from doing entity lookups
          for (Entity entity : this.level().getEntitiesOfClass(AbstractMinecart.class, this.getBoundingBox(), RIDABLE_MINECARTS)) { // Paper - optimise collisions
              if (this.distanceToSqr(entity) <= 0.2) {
-@@ -355,7 +_,14 @@
+@@ -355,7 +356,14 @@ public class ArmorStand extends LivingEntity {
              // CraftBukkit end
              // Paper start - avoid duplicate event call
              org.bukkit.event.entity.EntityDeathEvent event = this.brokenByAnything(level, source);
@@ -24,7 +32,7 @@
              // Paper end
              return false;
          }
-@@ -463,7 +_,14 @@
+@@ -463,7 +471,14 @@ public class ArmorStand extends LivingEntity {
          if (health <= 0.5F) {
              // Paper start - avoid duplicate event call
              org.bukkit.event.entity.EntityDeathEvent event = this.brokenByAnything(level, source);

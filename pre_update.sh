@@ -20,7 +20,7 @@ for file in "${BUILD_FILES[@]}"; do
 done
 
 echo "=== Rebuilding single-file patches ==="
-./gradlew rebuildFoliaSingleFilePatches --quiet
+./gradlew rebuildPaperSingleFilePatches --quiet
 
 echo "=== Rebuilding file patches as Git patches ==="
 ./gradlew rebuildAllServerFilePatches --quiet

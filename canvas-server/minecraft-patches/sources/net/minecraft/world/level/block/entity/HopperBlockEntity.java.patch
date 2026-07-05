@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/block/entity/HopperBlockEntity.java b/net/minecraft/world/level/block/entity/HopperBlockEntity.java
+index d3b29298d04986ecf31c8c38b4067cec7aa649f5..963372e70d79ff8ba7361746776b937bf703a356 100644
 --- a/net/minecraft/world/level/block/entity/HopperBlockEntity.java
 +++ b/net/minecraft/world/level/block/entity/HopperBlockEntity.java
-@@ -95,6 +_,7 @@
+@@ -95,6 +95,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
          if (!this.tryLoadLootTable(input)) {
              ContainerHelper.loadAllItems(input, this.items);
          }
@@ -8,7 +16,7 @@
  
          this.cooldownTime = input.getIntOr("TransferCooldown", -1);
      }
-@@ -117,7 +_,11 @@
+@@ -117,7 +118,11 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
      @Override
      public ItemStack removeItem(final int slot, final int count) {
          this.unpackLootTable(null);
@@ -21,7 +29,7 @@
      }
  
      @Override
-@@ -125,13 +_,24 @@
+@@ -125,13 +130,24 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
          this.unpackLootTable(null);
          this.getItems().set(slot, itemStack);
          itemStack.limitSize(this.getMaxStackSize(itemStack));
@@ -32,10 +40,9 @@
      public void setBlockState(final BlockState blockState) {
          super.setBlockState(blockState);
          this.facing = blockState.getValue(HopperBlock.FACING);
--    }
 +        canvas$recomputeFullState(this); // Canvas - optimize hoppers
 +        // Canvas - TODO - optimize hoppers - cache is locked and run tick skip system through here?
-+    }
+     }
 +    // Canvas start - optimize hoppers
 +
 +    @Override
@@ -47,12 +54,10 @@
  
      @Override
      protected Component getDefaultName() {
-@@ -156,8 +_,17 @@
+@@ -156,8 +172,17 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
      private static final int HOPPER_EMPTY = 0;
      private static final int HOPPER_HAS_ITEMS = 1;
      private static final int HOPPER_IS_FULL = 2;
--
--    private static int getFullState(final HopperBlockEntity hopper) {
 +    // Canvas start - optimize hoppers
 +    private int fullState = -1;
 +
@@ -61,13 +66,14 @@
 +        super.setChanged();
 +        canvas$recomputeFullState(this);
 +    }
-+
+ 
+-    private static int getFullState(final HopperBlockEntity hopper) {
 +    private static void canvas$recomputeFullState(final HopperBlockEntity hopper) {
 +    // Canvas end - optimize hoppers
          hopper.unpackLootTable(null);
  
          final List<ItemStack> hopperItems = hopper.items;
-@@ -174,18 +_,20 @@
+@@ -174,18 +199,20 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
  
              if (!full) {
                  // can't be full
@@ -91,7 +97,7 @@
      }
      // Paper end - Perf: Optimize Hoppers
  
-@@ -198,7 +_,8 @@
+@@ -198,7 +225,8 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
  
          if (!entity.isOnCooldown() && state.getValue(HopperBlock.ENABLED)) {
              boolean changed = false;
@@ -101,7 +107,7 @@
              if (fullState != HOPPER_EMPTY) { // Paper - Perf: Optimize Hoppers
                  changed = ejectItems(level, pos, entity);
              }
-@@ -702,7 +_,7 @@
+@@ -702,7 +730,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
          final boolean optimizeEntities
      ) {
          // Paper end - Perf: Optimize Hoppers
@@ -110,7 +116,7 @@
          if (result == null && (!optimizeEntities || !level.paperConfig().hopper.ignoreOccludingBlocks || !state.getBukkitMaterial().isOccluding())) { // Paper - Perf: Optimize Hoppers
              result = getEntityContainer(level, x, y, z);
          }
-@@ -717,7 +_,7 @@
+@@ -717,7 +745,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
              return worldlyContainerHolder.getContainer(state, level, pos);
          } else if (state.hasBlockEntity() && level.getBlockEntity(pos) instanceof Container container) {
              if (container instanceof ChestBlockEntity && block instanceof ChestBlock chestBlock) {
@@ -119,7 +125,7 @@
              }
  
              return container;
-@@ -777,6 +_,7 @@
+@@ -777,6 +805,7 @@ public class HopperBlockEntity extends RandomizableContainerBlockEntity implemen
      @Override
      protected void setItems(final NonNullList<ItemStack> items) {
          this.items = items;

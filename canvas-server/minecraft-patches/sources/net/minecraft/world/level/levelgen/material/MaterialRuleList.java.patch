@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/levelgen/material/MaterialRuleList.java b/net/minecraft/world/level/levelgen/material/MaterialRuleList.java
+index 2be3314197ffdaf3f25ea211c997db15a450915b..0c09d93747c66db2b84d0b3889aa39943a38d501 100644
 --- a/net/minecraft/world/level/levelgen/material/MaterialRuleList.java
 +++ b/net/minecraft/world/level/levelgen/material/MaterialRuleList.java
-@@ -8,13 +_,16 @@
+@@ -8,13 +8,16 @@ import org.jspecify.annotations.Nullable;
  public record MaterialRuleList(NoiseChunk.BlockStateFiller[] materialRuleList) implements NoiseChunk.BlockStateFiller {
      @Override
      public @Nullable BlockState calculate(final DensityFunction.FunctionContext context) {

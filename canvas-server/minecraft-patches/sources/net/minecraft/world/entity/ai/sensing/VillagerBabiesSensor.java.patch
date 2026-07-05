@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/ai/sensing/VillagerBabiesSensor.java b/net/minecraft/world/entity/ai/sensing/VillagerBabiesSensor.java
+index 2f3e93d4ccf238d0656e69b789ddb811263df470..5988b2d9bf1ee21404b016b8e9891b56e829f82b 100644
 --- a/net/minecraft/world/entity/ai/sensing/VillagerBabiesSensor.java
 +++ b/net/minecraft/world/entity/ai/sensing/VillagerBabiesSensor.java
-@@ -22,7 +_,21 @@
+@@ -22,7 +22,21 @@ public class VillagerBabiesSensor extends Sensor<LivingEntity> {
      }
  
      private List<LivingEntity> getNearestVillagerBabies(final LivingEntity myBody) {

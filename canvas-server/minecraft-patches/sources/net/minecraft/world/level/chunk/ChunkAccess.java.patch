@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/chunk/ChunkAccess.java b/net/minecraft/world/level/chunk/ChunkAccess.java
+index 28f703204afd834cd50335346ef065670d6b37ad..01ac8879afe7e69b5ae4dfc6f1ea8021952f36cd 100644
 --- a/net/minecraft/world/level/chunk/ChunkAccess.java
 +++ b/net/minecraft/world/level/chunk/ChunkAccess.java
-@@ -73,10 +_,272 @@
+@@ -73,10 +73,272 @@ public abstract class ChunkAccess implements LightChunk, StructureAccess, BiomeM
      protected final @Nullable BlendingData blendingData;
      public final Map<Heightmap.Types, Heightmap> heightmaps = Maps.newEnumMap(Heightmap.Types.class);
      // Paper - rewrite chunk system
@@ -277,7 +285,7 @@
      protected final LevelHeightAccessor levelHeightAccessor;
      protected final LevelChunkSection[] sections;
      // CraftBukkit start - SPIGOT-6814: move to ChunkAccess to account for 1.17 to 1.18 chunk upgrading.
-@@ -172,6 +_,12 @@
+@@ -172,6 +434,12 @@ public abstract class ChunkAccess implements LightChunk, StructureAccess, BiomeM
          this.minSection = ca.spottedleaf.moonrise.common.util.WorldUtil.getMinSection(levelHeightAccessor);
          this.maxSection = ca.spottedleaf.moonrise.common.util.WorldUtil.getMaxSection(levelHeightAccessor);
          // Paper end - get block chunk optimisation
@@ -290,7 +298,7 @@
      }
  
      private void replaceMissingSections(final PalettedContainerFactory containerFactory, final LevelChunkSection[] sections) { // Paper - Anti-Xray - make it a non-static method
-@@ -219,7 +_,18 @@
+@@ -219,7 +487,18 @@ public abstract class ChunkAccess implements LightChunk, StructureAccess, BiomeM
  
      public Set<BlockPos> getBlockEntitiesPos() {
          Set<BlockPos> result = Sets.newHashSet(this.pendingBlockEntities.keySet());
@@ -310,7 +318,7 @@
          return result;
      }
  
-@@ -277,7 +_,7 @@
+@@ -277,7 +556,7 @@ public abstract class ChunkAccess implements LightChunk, StructureAccess, BiomeM
      }
  
      public Map<Structure, StructureStart> getAllStarts() {
@@ -319,7 +327,7 @@
      }
  
      public void setAllStarts(final Map<Structure, StructureStart> starts) {
-@@ -299,7 +_,7 @@
+@@ -299,7 +578,7 @@ public abstract class ChunkAccess implements LightChunk, StructureAccess, BiomeM
  
      @Override
      public Map<Structure, LongSet> getAllReferences() {
@@ -328,7 +336,7 @@
      }
  
      @Override
-@@ -374,7 +_,7 @@
+@@ -374,7 +653,7 @@ public abstract class ChunkAccess implements LightChunk, StructureAccess, BiomeM
  
      public void setBlockEntityNbt(final CompoundTag entityTag) {
          BlockPos posFromTag = BlockEntity.getPosFromTag(this.chunkPos, entityTag);

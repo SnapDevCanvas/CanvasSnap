@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/ai/behavior/VillagerGoalPackages.java b/net/minecraft/world/entity/ai/behavior/VillagerGoalPackages.java
+index fa9163d1f73eacd110227b6cf95f578c678aa803..e3854c09112747886e9fa47de4322b30d7e5cd56 100644
 --- a/net/minecraft/world/entity/ai/behavior/VillagerGoalPackages.java
 +++ b/net/minecraft/world/entity/ai/behavior/VillagerGoalPackages.java
-@@ -54,13 +_,15 @@
+@@ -54,13 +54,15 @@ public class VillagerGoalPackages {
                      MemoryModuleType.POTENTIAL_JOB_SITE,
                      true,
                      Optional.empty(),

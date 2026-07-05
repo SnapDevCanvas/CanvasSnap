@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/ServerExplosion.java b/net/minecraft/world/level/ServerExplosion.java
+index 7db555c4cee48faf805e7e843fe391a0dec6a443..8d2047df8ff84cd67d9eb41fb1625d488a2473c9 100644
 --- a/net/minecraft/world/level/ServerExplosion.java
 +++ b/net/minecraft/world/level/ServerExplosion.java
-@@ -509,6 +_,27 @@
+@@ -509,6 +509,27 @@ public class ServerExplosion implements Explosion {
                                          dragonPart.hurtServer(this.level, this.damageSource, this.damageCalculator.getEntityDamageAmount(this, dragonPart, exposure));
                                      }
                                  }
@@ -28,7 +36,7 @@
                              } else {
                                  entity.hurtServer(this.level, this.damageSource, this.damageCalculator.getEntityDamageAmount(this, entity, exposure));
                              }
-@@ -522,7 +_,7 @@
+@@ -522,7 +543,7 @@ public class ServerExplosion implements Explosion {
                          double knockbackResistance = entity instanceof LivingEntity livingEntity
                              ? livingEntity.getAttributeValue(Attributes.EXPLOSION_KNOCKBACK_RESISTANCE)
                              : 0.0;
@@ -37,7 +45,7 @@
                          Vec3 knockback = direction.scale(knockbackPower);
                          // CraftBukkit start - Call EntityKnockbackEvent
                          if (entity instanceof LivingEntity) {
-@@ -545,6 +_,46 @@
+@@ -545,6 +566,46 @@ public class ServerExplosion implements Explosion {
              }
          }
      }

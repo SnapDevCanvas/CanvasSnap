@@ -4,7 +4,7 @@ import io.papermc.paperweight.core.tasks.patchroulette.AbstractPatchRouletteTask
 
 plugins {
     java
-    id("io.canvasmc.weaver.patcher") version "2.4.5"
+    id("io.canvasmc.weaver.patcher") version "2.4.6-SNAPSHOT"
     id("xyz.jpenilla.resource-factory-paper-convention") version "1.3.1" apply false
 }
 
@@ -13,7 +13,7 @@ val canvasMavenPublicUrl = "https://maven.canvasmc.io/public/"
 
 paperweight {
     filterPatches = false
-    gitFilePatches = false
+    gitFilePatches = true
     upstreams.paper {
         ref = providers.gradleProperty("paperRef")
 

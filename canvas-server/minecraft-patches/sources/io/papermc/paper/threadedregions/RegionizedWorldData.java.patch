@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/io/papermc/paper/threadedregions/RegionizedWorldData.java b/io/papermc/paper/threadedregions/RegionizedWorldData.java
+index 6810b850bdbf4a936488d3cdc48b830948e758ba..d0a319856e641f06d92ea61a1a55ee8782781090 100644
 --- a/io/papermc/paper/threadedregions/RegionizedWorldData.java
 +++ b/io/papermc/paper/threadedregions/RegionizedWorldData.java
-@@ -123,7 +_,13 @@
+@@ -123,7 +123,13 @@ public final class RegionizedWorldData {
              }
              for (final TickingBlockEntity tileEntityWrapped : from.blockEntityTickers) {
                  into.blockEntityTickers.add(tileEntityWrapped);
@@ -15,7 +23,7 @@
                  if (tileEntity != null) {
                      tileEntity.updateTicks(fromTickOffset, fromRedstoneTimeOffset);
                  }
-@@ -249,7 +_,18 @@
+@@ -249,7 +255,18 @@ public final class RegionizedWorldData {
                    //       marked as removed. So if there is no section, it's probably removed!
              }
              for (final TickingBlockEntity tileEntity : from.blockEntityTickers) {
@@ -35,7 +43,7 @@
                  final int chunkX = pos.getX() >> 4;
                  final int chunkZ = pos.getZ() >> 4;
  
-@@ -339,7 +_,7 @@
+@@ -339,7 +356,7 @@ public final class RegionizedWorldData {
      private RegionizedServer.WorldLevelData tickData;
  
      // connections
@@ -44,7 +52,7 @@
  
      // misc. fields
      private boolean isHandlingTick;
-@@ -370,8 +_,8 @@
+@@ -370,8 +387,8 @@ public final class RegionizedWorldData {
      private final LevelTicks<Fluid> fluidLevelTicks;
  
      // tile entity ticking
@@ -55,7 +63,7 @@
      private boolean tickingBlockEntities;
  
      // time
-@@ -400,6 +_,7 @@
+@@ -400,6 +417,7 @@ public final class RegionizedWorldData {
      public boolean skipPullModeEventFire = false;
      public boolean skipPushModeEventFire = false;
      public boolean skipHopperEvents = false;
@@ -63,7 +71,7 @@
      // Paper end - Optimize Hoppers
      public long lastMidTickExecute;
      public long lastMidTickExecuteFailure;
-@@ -408,8 +_,8 @@
+@@ -408,8 +426,8 @@ public final class RegionizedWorldData {
      public final CollectingNeighborUpdater neighborUpdater;
      public boolean captureBlockStates = false;
      public boolean captureTreeGeneration = false;
@@ -74,7 +82,7 @@
      public List<ItemEntity> captureDrops;
      // Paper start
      public int wakeupInactiveRemainingAnimals;
-@@ -423,7 +_,7 @@
+@@ -423,7 +441,7 @@ public final class RegionizedWorldData {
      public boolean shouldSignal = true;
      public final Map<ServerExplosion.CacheKey, Float> explosionDensityCache = new HashMap<>(64, 0.25f);
      public final PathTypeCache pathTypesByPosCache = new PathTypeCache();
@@ -83,7 +91,7 @@
      public final Set<ChunkHolder> chunkHoldersToBroadcast = new ReferenceLinkedOpenHashSet<>();
  
      // not transient
-@@ -491,6 +_,7 @@
+@@ -491,6 +509,7 @@ public final class RegionizedWorldData {
          this.skipHopperEvents = this.world.paperConfig().hopper.disableMoveEvent || org.bukkit.event.inventory.InventoryMoveItemEvent.getHandlerList().getRegisteredListeners().length == 0; // Paper - Perf: Optimize Hoppers
          // always subtract from server init so that the tick starts at zero, allowing us to cast to int without much worry
          this.lagCompensationTick = (System.nanoTime() - MinecraftServer.SERVER_INIT) / TickRegionScheduler.getTimeBetweenTicks(); // Canvas - region threading

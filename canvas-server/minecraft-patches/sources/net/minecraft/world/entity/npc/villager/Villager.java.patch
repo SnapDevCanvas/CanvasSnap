@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/npc/villager/Villager.java b/net/minecraft/world/entity/npc/villager/Villager.java
+index 753a7d1f1b464b27dc375f80dddd41e45d58c149..f76aa947ff79f76e74cfbfe6ec4e57c05778f755 100644
 --- a/net/minecraft/world/entity/npc/villager/Villager.java
 +++ b/net/minecraft/world/entity/npc/villager/Villager.java
-@@ -841,7 +_,15 @@
+@@ -841,7 +841,15 @@ public class Villager extends AbstractVillager implements VillagerDataHolder, Re
  
      private int countFoodPointsInInventory() {
          SimpleContainer inventory = this.getInventory();

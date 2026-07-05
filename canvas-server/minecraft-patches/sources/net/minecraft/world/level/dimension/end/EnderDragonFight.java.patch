@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/dimension/end/EnderDragonFight.java b/net/minecraft/world/level/dimension/end/EnderDragonFight.java
+index 6013b0a12a8ebe200873a73c26d37491a742a164..aa26a39b82d0dd5680aa0d2dbc032721df461256 100644
 --- a/net/minecraft/world/level/dimension/end/EnderDragonFight.java
 +++ b/net/minecraft/world/level/dimension/end/EnderDragonFight.java
-@@ -333,7 +_,7 @@
+@@ -333,7 +333,7 @@ public class EnderDragonFight extends SavedData {
              for (int z = -8; z <= 8; z++) {
                  LevelChunk chunk = this.level.getChunk(x, z);
  
@@ -9,7 +17,7 @@
                      if (blockEntity instanceof TheEndPortalBlockEntity) {
                          return true;
                      }
-@@ -351,7 +_,7 @@
+@@ -351,7 +351,7 @@ public class EnderDragonFight extends SavedData {
              for (int z = -8 + chunkOrigin.z(); z <= 8 + chunkOrigin.z(); z++) {
                  LevelChunk chunk = this.level.getChunk(x, z);
  

@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/projectile/throwableitemprojectile/Snowball.java b/net/minecraft/world/entity/projectile/throwableitemprojectile/Snowball.java
+index d183a75c87626c680b96016c535f31acdfbc710e..bf0ba1449fac52ea3dd7e10ed8161ecd3baa2b3e 100644
 --- a/net/minecraft/world/entity/projectile/throwableitemprojectile/Snowball.java
 +++ b/net/minecraft/world/entity/projectile/throwableitemprojectile/Snowball.java
-@@ -57,6 +_,12 @@
+@@ -57,6 +57,12 @@ public class Snowball extends ThrowableItemProjectile {
          Entity entity = hitResult.getEntity();
          int damage = entity instanceof Blaze ? 3 : 0;
          entity.hurt(this.damageSources().thrown(this, this.getOwner()), damage);

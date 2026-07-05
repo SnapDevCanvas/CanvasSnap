@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/ai/memory/NearestVisibleLivingEntities.java b/net/minecraft/world/entity/ai/memory/NearestVisibleLivingEntities.java
+index a18716581c758da09bc654de02af7c51a70fd62b..c21f3ffed3df0aa9b6bfb74d4655d408dfecb4ad 100644
 --- a/net/minecraft/world/entity/ai/memory/NearestVisibleLivingEntities.java
 +++ b/net/minecraft/world/entity/ai/memory/NearestVisibleLivingEntities.java
-@@ -38,11 +_,26 @@
+@@ -38,11 +38,26 @@ public class NearestVisibleLivingEntities {
      }
  
      public Optional<LivingEntity> findClosest(final Predicate<LivingEntity> filter) {
@@ -30,11 +38,10 @@
  
          return Optional.empty();
      }
-@@ -54,6 +_,18 @@
-     public Stream<LivingEntity> find(final Predicate<LivingEntity> filter) {
+@@ -55,6 +70,18 @@ public class NearestVisibleLivingEntities {
          return this.nearbyEntities.stream().filter(entity -> filter.test(entity) && this.lineOfSightTest.test(entity));
      }
-+
+ 
 +    // Leaf start - Optimize SetLookAndInteract and NearestVisibleLivingEntities
 +    public List<LivingEntity> findWithList(Predicate<LivingEntity> predicate) {
 +        it.unimi.dsi.fastutil.objects.ObjectList<LivingEntity> result = new it.unimi.dsi.fastutil.objects.ObjectArrayList<>();
@@ -46,6 +53,7 @@
 +        return result;
 +    }
 +    // Leaf end - Optimize SetLookAndInteract and NearestVisibleLivingEntities
- 
++
      public boolean contains(final LivingEntity targetEntity) {
          return this.nearbyEntities.contains(targetEntity) && this.lineOfSightTest.test(targetEntity);
+     }

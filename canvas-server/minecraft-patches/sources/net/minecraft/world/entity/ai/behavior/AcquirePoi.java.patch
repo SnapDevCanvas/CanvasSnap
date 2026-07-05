@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/ai/behavior/AcquirePoi.java b/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
+index e2eb02d8a0a9481be2308c9052582591bc4f9850..89e318fd86b2ad52a0467bd83d662d264beb1817 100644
 --- a/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
 +++ b/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
-@@ -54,6 +_,21 @@
+@@ -54,6 +54,21 @@ public class AcquirePoi {
          final Optional<Byte> onPoiAcquisitionEvent,
          final BiPredicate<ServerLevel, BlockPos> validPoi
      ) {
@@ -22,7 +30,7 @@
          int batchSize = 5;
          int rate = 20;
          MutableLong nextScheduledStart = new MutableLong(0L);
-@@ -96,7 +_,7 @@
+@@ -96,7 +111,7 @@ public class AcquirePoi {
                          };
                          // Paper start - optimise POI searches
                          java.util.List<Pair<Holder<PoiType>, BlockPos>> poiPositionsRaw = new java.util.ArrayList<>();

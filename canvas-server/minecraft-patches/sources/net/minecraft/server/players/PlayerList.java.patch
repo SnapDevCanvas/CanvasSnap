@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/server/players/PlayerList.java b/net/minecraft/server/players/PlayerList.java
+index 360663781feb02ba550b84acb1447d7eca2ab138..d6fc6f49f155d2f4e260495cfdcc8d9d1a07fc9d 100644
 --- a/net/minecraft/server/players/PlayerList.java
 +++ b/net/minecraft/server/players/PlayerList.java
-@@ -110,7 +_,7 @@
+@@ -110,7 +110,7 @@ public abstract class PlayerList {
      public static final Component CHAT_FILTERED_FULL = Component.translatable("chat.filtered_full");
      public static final Component DUPLICATE_LOGIN_DISCONNECT_MESSAGE = Component.translatable("multiplayer.disconnect.duplicate_login");
      private static final Logger LOGGER = LogUtils.getLogger();
@@ -9,7 +17,7 @@
      private static final ThreadLocal<SimpleDateFormat> BAN_DATE_FORMAT = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z", Locale.ROOT)); // Folia - region threading - SDF is not thread-safe
      private final MinecraftServer server;
      private final List<ServerPlayer> players = new java.util.concurrent.CopyOnWriteArrayList(); // CraftBukkit - ArrayList -> CopyOnWriteArrayList: Iterator safety
-@@ -129,6 +_,7 @@
+@@ -129,6 +129,7 @@ public abstract class PlayerList {
      private int simulationDistance;
      private boolean allowCommandsForAllPlayers;
      private int sendAllPlayerInfoIn;
@@ -17,7 +25,7 @@
  
      // CraftBukkit start
      private org.bukkit.craftbukkit.CraftServer cserver;
-@@ -258,7 +_,7 @@
+@@ -258,7 +259,7 @@ public abstract class PlayerList {
                  doLimitedCrafting,
                  player.createCommonSpawnInfo(level),
                  this.server.usesAuthentication(),
@@ -26,7 +34,7 @@
              )
          );
          player.getBukkitEntity().sendSupportedChannels(); // CraftBukkit
-@@ -292,6 +_,8 @@
+@@ -292,6 +293,8 @@ public abstract class PlayerList {
  
          // player.connection.send(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(this.players)); // CraftBukkit - replaced with loop below
          this.players.add(player);
@@ -35,7 +43,7 @@
          this.playersByName.put(player.getScoreboardName().toLowerCase(java.util.Locale.ROOT), player); // Spigot
          this.playersByUUID.put(player.getUUID(), player);
          // this.broadcastAll(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(player))); // CraftBukkit - replaced with loop below
-@@ -494,6 +_,7 @@
+@@ -494,6 +497,7 @@ public abstract class PlayerList {
          if (advancements != null) {
              advancements.save();
          }
@@ -43,7 +51,7 @@
      }
  
      public net.kyori.adventure.text.@Nullable Component remove(final ServerPlayer player) { // CraftBukkit - return string // Paper - return Component
-@@ -562,6 +_,7 @@
+@@ -562,6 +566,7 @@ public abstract class PlayerList {
          player.getBukkitEntity().packetProcessor.close(); // Folia - region threading
          player.getAdvancements().clearTriggers();
          this.players.remove(player);
@@ -51,7 +59,7 @@
          this.playersByName.remove(player.getScoreboardName().toLowerCase(java.util.Locale.ROOT)); // Spigot
          this.server.getCustomBossEvents().onPlayerDisconnect(player);
          UUID uuid = player.getUUID();
-@@ -589,6 +_,7 @@
+@@ -589,6 +594,7 @@ public abstract class PlayerList {
          // This removes the scoreboard (and player reference) for the specific player in the manager
          this.cserver.getScoreboardManager().removePlayer(player.getBukkitEntity());
          // CraftBukkit end
@@ -59,7 +67,7 @@
          return playerQuitEvent.quitMessage(); // Paper - Adventure
      }
  
-@@ -799,6 +_,20 @@
+@@ -799,6 +805,20 @@ public abstract class PlayerList {
      }
  
      public void tick() {
@@ -80,7 +88,7 @@
          if (++this.sendAllPlayerInfoIn > 600) {
              // CraftBukkit start
              // Folia start - region threading
-@@ -812,6 +_,62 @@
+@@ -812,6 +832,62 @@ public abstract class PlayerList {
              this.sendAllPlayerInfoIn = 0;
          }
      }
@@ -143,7 +151,7 @@
  
      // CraftBukkit start - add a world/entity limited version
      public void broadcastAll(Packet packet, net.minecraft.world.entity.player.Player entityhuman) {
-@@ -1035,16 +_,19 @@
+@@ -1035,16 +1111,19 @@ public abstract class PlayerList {
          final Packet<?> packet
      ) {
          for (ServerPlayer player : this.players) { // Folia - region threading
@@ -168,7 +176,7 @@
                      player.connection.send(packet);
                  }
              }
-@@ -1062,9 +_,9 @@
+@@ -1062,9 +1141,9 @@ public abstract class PlayerList {
              int numSaved = 0;
              final long now = System.nanoTime(); // Folia - region threading
              final long timeInterval = (long)interval * io.papermc.paper.threadedregions.TickRegionScheduler.getTimeBetweenTicks(); // Folia - region threading // Canvas - region threading
@@ -180,7 +188,7 @@
                  continue;
              }
              // Folia end - region threading
-@@ -1289,6 +_,7 @@
+@@ -1289,6 +1368,7 @@ public abstract class PlayerList {
      }
  
      public boolean verifyChatTrusted(final PlayerChatMessage message) {
@@ -188,7 +196,7 @@
          return message.hasSignature() && !message.hasExpiredServer(Instant.now());
      }
  
-@@ -1349,7 +_,12 @@
+@@ -1349,7 +1429,12 @@ public abstract class PlayerList {
          //this.broadcastAll(new ClientboundSetChunkCacheRadiusPacket(viewDistance)); // Paper - rewrite chunk system
  
          for (ServerLevel level : this.server.getAllLevels()) {
@@ -202,7 +210,7 @@
          }
      }
  
-@@ -1358,7 +_,12 @@
+@@ -1358,7 +1443,12 @@ public abstract class PlayerList {
          //this.broadcastAll(new ClientboundSetSimulationDistancePacket(simulationDistance)); // Paper - rewrite chunk system
  
          for (ServerLevel level : this.server.getAllLevels()) {

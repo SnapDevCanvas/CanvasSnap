@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/levelgen/synth/ImprovedNoise.java b/net/minecraft/world/level/levelgen/synth/ImprovedNoise.java
+index ef8f2a00945a3d240a23ca73f138960ee0fe8742..ce422db7961bfde1e0d17eb63691e4abd8e0bedb 100644
 --- a/net/minecraft/world/level/levelgen/synth/ImprovedNoise.java
 +++ b/net/minecraft/world/level/levelgen/synth/ImprovedNoise.java
-@@ -11,6 +_,27 @@
+@@ -11,6 +11,27 @@ public final class ImprovedNoise {
      public final double yo;
      public final double zo;
  
@@ -28,7 +36,7 @@
      public ImprovedNoise(final RandomSource random) {
          this.xo = random.nextDouble() * 256.0;
          this.yo = random.nextDouble() * 256.0;
-@@ -38,9 +_,11 @@
+@@ -38,9 +59,11 @@ public final class ImprovedNoise {
          double x = _x + this.xo;
          double y = _y + this.yo;
          double z = _z + this.zo;
@@ -43,7 +51,7 @@
          double xr = x - xf;
          double yr = y - yf;
          double zr = z - zf;
-@@ -53,12 +_,12 @@
+@@ -53,12 +76,12 @@ public final class ImprovedNoise {
                  fudgeLimit = yr;
              }
  
@@ -58,7 +66,7 @@
      }
  
      public double noiseWithDerivative(final double _x, final double _y, final double _z, final double[] derivativeOut) {
-@@ -83,24 +_,69 @@
+@@ -83,24 +106,69 @@ public final class ImprovedNoise {
      }
  
      private double sampleAndLerp(final int x, final int y, final int z, final double xr, final double yr, final double zr, final double yrOriginal) {

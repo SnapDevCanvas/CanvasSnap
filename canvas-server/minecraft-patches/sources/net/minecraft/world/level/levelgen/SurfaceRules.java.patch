@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/levelgen/SurfaceRules.java b/net/minecraft/world/level/levelgen/SurfaceRules.java
+index 7a3b0da821352b228ca2cd1d8a288238715a377d..e90df8cbddb0458be13a046090133ece55e0f29a 100644
 --- a/net/minecraft/world/level/levelgen/SurfaceRules.java
 +++ b/net/minecraft/world/level/levelgen/SurfaceRules.java
-@@ -666,8 +_,13 @@
+@@ -666,8 +666,13 @@ public class SurfaceRules {
      private record SequenceRule(List<SurfaceRules.SurfaceRule> rules) implements SurfaceRules.SurfaceRule {
          @Override
          public @Nullable BlockState tryApply(final int blockX, final int blockY, final int blockZ) {

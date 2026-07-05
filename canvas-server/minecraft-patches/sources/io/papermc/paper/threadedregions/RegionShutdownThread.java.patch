@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/io/papermc/paper/threadedregions/RegionShutdownThread.java b/io/papermc/paper/threadedregions/RegionShutdownThread.java
+index ab5778800ef164036316053d7acf07a17ed12374..121727866890dafb8a4d8c9828d3b8c9ab730508 100644
 --- a/io/papermc/paper/threadedregions/RegionShutdownThread.java
 +++ b/io/papermc/paper/threadedregions/RegionShutdownThread.java
-@@ -156,6 +_,7 @@
+@@ -156,6 +156,7 @@ public class RegionShutdownThread extends TickThread {
                          player.containerMenu.setCarried(ItemStack.EMPTY);
                          player.drop(carried, false);
                      }

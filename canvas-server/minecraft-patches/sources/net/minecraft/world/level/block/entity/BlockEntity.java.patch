@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/block/entity/BlockEntity.java b/net/minecraft/world/level/block/entity/BlockEntity.java
+index 71a6c3a03ccf70777ec230fea0a652c61f01fec1..0d79ce3984a8ee1bf6b04b83142f8c9511f55e8d 100644
 --- a/net/minecraft/world/level/block/entity/BlockEntity.java
 +++ b/net/minecraft/world/level/block/entity/BlockEntity.java
-@@ -52,6 +_,7 @@
+@@ -52,6 +52,7 @@ public abstract class BlockEntity implements DebugValueSource, TypedInstance<Blo
      protected boolean remove;
      private BlockState blockState;
      private DataComponentMap components = DataComponentMap.EMPTY;
@@ -8,7 +16,7 @@
  
      // Folia start - region threading
      public void updateTicks(final long fromTickOffset, final long fromRedstoneTimeOffset) {
-@@ -65,6 +_,7 @@
+@@ -65,6 +66,7 @@ public abstract class BlockEntity implements DebugValueSource, TypedInstance<Blo
          this.validateBlockState(blockState);
          this.blockState = blockState;
          this.persistentDataContainer = new org.bukkit.craftbukkit.persistence.CraftPersistentDataContainer(DATA_TYPE_REGISTRY); // Paper - always init
@@ -16,7 +24,7 @@
      }
  
      private void validateBlockState(final BlockState blockState) {
-@@ -219,6 +_,11 @@
+@@ -219,6 +221,11 @@ public abstract class BlockEntity implements DebugValueSource, TypedInstance<Blo
              if (IGNORE_TILE_UPDATES.get().booleanValue()) return; // Paper - Perf: Optimize Hoppers // Folia - region threading
              setChanged(this.level, this.worldPosition, this.blockState);
          }
@@ -28,7 +36,7 @@
      }
  
      protected static void setChanged(final Level level, final BlockPos worldPosition, final BlockState blockState) {
-@@ -294,6 +_,7 @@
+@@ -294,6 +301,7 @@ public abstract class BlockEntity implements DebugValueSource, TypedInstance<Blo
      public void setBlockState(final BlockState blockState) {
          this.validateBlockState(blockState);
          this.blockState = blockState;
@@ -36,7 +44,7 @@
      }
  
      protected void applyImplicitComponents(final DataComponentGetter components) {
-@@ -371,7 +_,7 @@
+@@ -371,7 +379,7 @@ public abstract class BlockEntity implements DebugValueSource, TypedInstance<Blo
  
      // CraftBukkit start - add method
      public org.bukkit.inventory.@Nullable InventoryHolder getOwner() {

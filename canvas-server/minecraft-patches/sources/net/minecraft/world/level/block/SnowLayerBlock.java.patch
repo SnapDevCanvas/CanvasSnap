@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/block/SnowLayerBlock.java b/net/minecraft/world/level/block/SnowLayerBlock.java
+index 6f67b5bdfae6072a61b5e0a730d739601c74b396..11924bec2f6c168a1a75e88b1f85454d09b1d806 100644
 --- a/net/minecraft/world/level/block/SnowLayerBlock.java
 +++ b/net/minecraft/world/level/block/SnowLayerBlock.java
-@@ -102,7 +_,7 @@
+@@ -102,7 +102,7 @@ public class SnowLayerBlock extends Block {
  
      @Override
      protected void randomTick(final BlockState state, final ServerLevel level, final BlockPos pos, final RandomSource random) {

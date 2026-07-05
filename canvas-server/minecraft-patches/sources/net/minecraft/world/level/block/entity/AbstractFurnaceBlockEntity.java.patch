@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity.java b/net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity.java
+index 78dbdf43ac9095eb3cf0b0653bab2603d5527ff4..b77d30dc1c2435e4d7ed596ae31fd1944c4ba628 100644
 --- a/net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity.java
 +++ b/net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity.java
-@@ -39,7 +_,7 @@
+@@ -39,7 +39,7 @@ import net.minecraft.world.level.storage.ValueOutput;
  import net.minecraft.world.phys.Vec3;
  import org.jspecify.annotations.Nullable;
  
@@ -9,7 +17,7 @@
      protected static final int SLOT_INPUT = 0;
      protected static final int SLOT_FUEL = 1;
      protected static final int SLOT_RESULT = 2;
-@@ -106,6 +_,48 @@
+@@ -106,6 +106,48 @@ public abstract class AbstractFurnaceBlockEntity extends BaseContainerBlockEntit
      private final RecipeManager.CachedCheck<SingleRecipeInput, ? extends AbstractCookingRecipe> quickCheck;
      public final RecipeType<? extends AbstractCookingRecipe> recipeType; // Paper - cook speed multiplier API
      public double cookSpeedMultiplier = 1.0; // Paper - cook speed multiplier API
@@ -58,7 +66,7 @@
  
      protected AbstractFurnaceBlockEntity(
          final BlockEntityType<?> type, final BlockPos worldPosition, final BlockState blockState, final RecipeType<? extends AbstractCookingRecipe> recipeType
-@@ -162,6 +_,11 @@
+@@ -162,6 +204,11 @@ public abstract class AbstractFurnaceBlockEntity extends BaseContainerBlockEntit
          this.recipesUsed.clear();
          this.recipesUsed.putAll(input.read("RecipesUsed", RECIPES_USED_CODEC).orElse(Map.of()));
          this.cookSpeedMultiplier = input.getDoubleOr("Paper.CookSpeedMultiplier", 1); // Paper - cook speed multiplier API
@@ -70,7 +78,7 @@
      }
  
      @Override
-@@ -209,7 +_,12 @@
+@@ -209,7 +256,12 @@ public abstract class AbstractFurnaceBlockEntity extends BaseContainerBlockEntit
                                  org.bukkit.craftbukkit.inventory.CraftItemStack.asCraftMirror(fuel),
                                  newLitTime
                              );
@@ -84,7 +92,7 @@
                              newLitTime = burnEvent.getBurnTime();
                              // CraftBukkit end
                              entity.litTimeRemaining = newLitTime;
-@@ -269,6 +_,7 @@
+@@ -269,6 +321,7 @@ public abstract class AbstractFurnaceBlockEntity extends BaseContainerBlockEntit
          if (changed) {
              setChanged(level, pos, state);
          }

@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/levelgen/structure/pools/JigsawPlacement.java b/net/minecraft/world/level/levelgen/structure/pools/JigsawPlacement.java
+index b92da7acae0789d955a9f71072b95ed030b879e2..630b74b56657904db1ba42332c7c8fc174fce9fd 100644
 --- a/net/minecraft/world/level/levelgen/structure/pools/JigsawPlacement.java
 +++ b/net/minecraft/world/level/levelgen/structure/pools/JigsawPlacement.java
-@@ -289,6 +_,108 @@
+@@ -289,6 +289,108 @@ public class JigsawPlacement {
              this.pieces = pieces;
              this.random = random;
          }
@@ -109,7 +117,7 @@
  
          private void tryPlacingChildren(
              final PoolElementStructurePiece sourcePiece,
-@@ -347,9 +_,9 @@
+@@ -347,9 +449,9 @@ public class JigsawPlacement {
                                  childrenFree = contextFree;
                              }
  
@@ -121,7 +129,7 @@
                              }
  
                              targetPieces.addAll(fallback.value().getShuffledTemplates(this.random));
-@@ -360,10 +_,14 @@
+@@ -360,10 +462,14 @@ public class JigsawPlacement {
                                      break;
                                  }
  
@@ -138,7 +146,7 @@
                                      BoundingBox hackBox = targetElement.getBoundingBox(this.structureTemplateManager, BlockPos.ZERO, targetRotation);
                                      int expandTo;
                                      if (doExpansionHack && hackBox.getYSpan() <= 16) {
-@@ -396,7 +_,7 @@
+@@ -396,7 +502,7 @@ public class JigsawPlacement {
                                      }
  
                                      for (StructureTemplate.JigsawBlockInfo targetJigsaw : targetJigsaws) {
@@ -147,7 +155,7 @@
                                              BlockPos targetJigsawLocalPos = targetJigsaw.info().pos();
                                              BlockPos rawTargetBoxPos = targetJigsawPos.subtract(targetJigsawLocalPos);
                                              BoundingBox rawTargetBB = targetElement.getBoundingBox(
-@@ -435,9 +_,26 @@
+@@ -435,9 +541,26 @@ public class JigsawPlacement {
                                                  targetBB.encapsulate(new BlockPos(targetBB.minX(), targetBB.minY() + newSize, targetBB.minZ()));
                                              }
  

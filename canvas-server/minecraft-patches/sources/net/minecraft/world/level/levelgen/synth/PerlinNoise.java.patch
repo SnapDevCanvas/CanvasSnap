@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/levelgen/synth/PerlinNoise.java b/net/minecraft/world/level/levelgen/synth/PerlinNoise.java
+index 9f9836f6bf15c5d3aa283c2cbcf6d29202ff22bb..09f7e6945414b61c2c5a67cbdaba6097439d3468 100644
 --- a/net/minecraft/world/level/levelgen/synth/PerlinNoise.java
 +++ b/net/minecraft/world/level/levelgen/synth/PerlinNoise.java
-@@ -26,6 +_,10 @@
+@@ -26,6 +26,10 @@ public class PerlinNoise {
      private final double lowestFreqValueFactor;
      private final double lowestFreqInputFactor;
      private final double maxValue;
@@ -11,7 +19,7 @@
  
      @Deprecated
      public static PerlinNoise createLegacyForBlendedNoise(final RandomSource random, final IntStream octaves) {
-@@ -127,6 +_,10 @@
+@@ -127,6 +131,10 @@ public class PerlinNoise {
          this.lowestFreqInputFactor = Math.pow(2.0, -zeroOctaveIndex);
          this.lowestFreqValueFactor = Math.pow(2.0, octaves - 1) / (Math.pow(2.0, octaves) - 1.0);
          this.maxValue = this.edgeValue(2.0);
@@ -22,7 +30,7 @@
      }
  
      protected double maxValue() {
-@@ -138,7 +_,27 @@
+@@ -138,7 +146,27 @@ public class PerlinNoise {
      }
  
      public double getValue(final double x, final double y, final double z) {

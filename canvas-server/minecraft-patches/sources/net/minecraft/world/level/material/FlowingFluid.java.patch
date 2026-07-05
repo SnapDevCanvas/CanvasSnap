@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/material/FlowingFluid.java b/net/minecraft/world/level/material/FlowingFluid.java
+index 2fa631d9c770b73af0c9fc059405d2eaed759923..17334f7573fd1f6c49e5fbd1214bdd2011b16101 100644
 --- a/net/minecraft/world/level/material/FlowingFluid.java
 +++ b/net/minecraft/world/level/material/FlowingFluid.java
-@@ -341,30 +_,122 @@
+@@ -341,30 +341,122 @@ public abstract class FlowingFluid extends Fluid {
          final LevelReader level, final BlockPos pos, final int pass, final Direction from, final BlockState state, final FlowingFluid.SpreadContext context
      ) {
          int lowest = 1000;
@@ -20,15 +28,14 @@
 -                    if (context.isHole(testPos)) {
 -                        return pass;
 -                    }
--
++            if (direction == from) continue;
+ 
 -                    if (pass < this.getSlopeFindDistance(level)) {
 -                        int v = this.getSlopeDistance(level, testPos, pass + 1, direction.getOpposite(), testState, context);
 -                        if (v < lowest) {
 -                            lowest = v;
 -                        }
 -                    }
-+            if (direction == from) continue;
-+
 +            BlockPos testPos = pos.relative(direction); // immutable
 +            BlockState testState = context.getBlockStateIfLoaded(testPos); // Paper - Prevent chunk loading from fluid flowing
 +            if (testState == null) continue; // Paper - Prevent chunk loading from fluid flowing
@@ -139,7 +146,7 @@
  
      public boolean isWaterHole(
          final BlockGetter level, final BlockPos topPos, final BlockState topState, final BlockPos bottomPos, final BlockState bottomState
-@@ -383,8 +_,7 @@
+@@ -383,8 +475,7 @@ public abstract class FlowingFluid extends Fluid {
          final BlockState testState,
          final FluidState testFluidState
      ) {
@@ -149,7 +156,7 @@
      }
  
      public boolean canMaybePassThrough(
-@@ -397,7 +_,7 @@
+@@ -397,7 +488,7 @@ public abstract class FlowingFluid extends Fluid {
          final FluidState testFluidState
      ) {
          return !this.isSourceBlockOfThisType(testFluidState)
@@ -158,7 +165,7 @@
              && canPassThroughWall(direction, level, sourcePos, sourceState, testPos, testState);
      }
  
-@@ -479,7 +_,7 @@
+@@ -479,7 +570,7 @@ public abstract class FlowingFluid extends Fluid {
      }
  
      private static boolean canHoldFluid(final BlockGetter level, final BlockPos pos, final BlockState state, final Fluid newFluid) {

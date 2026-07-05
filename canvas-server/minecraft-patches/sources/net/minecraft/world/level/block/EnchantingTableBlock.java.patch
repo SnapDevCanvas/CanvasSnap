@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/block/EnchantingTableBlock.java b/net/minecraft/world/level/block/EnchantingTableBlock.java
+index 8d3a6345588384e755e1866c70afcb905070dbd8..5f818537ccf6d13cf62904342b8b388efcb8b25c 100644
 --- a/net/minecraft/world/level/block/EnchantingTableBlock.java
 +++ b/net/minecraft/world/level/block/EnchantingTableBlock.java
-@@ -46,8 +_,32 @@
+@@ -46,8 +46,32 @@ public class EnchantingTableBlock extends BaseEntityBlock {
      }
  
      public static boolean isValidBookShelf(final Level level, final BlockPos pos, final BlockPos offset) {

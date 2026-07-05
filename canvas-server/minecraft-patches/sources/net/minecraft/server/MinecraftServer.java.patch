@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/server/MinecraftServer.java b/net/minecraft/server/MinecraftServer.java
+index 8bea36b4f71164a5be1cfb969816ae59b4c02839..256afa6b56cfb9de97a40a1f239ca397032923dc 100644
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -1331,11 +_,7 @@
+@@ -1331,11 +1331,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
                  LOGGER.info("*************************************************************************************");
              }
              // Paper end - Add onboarding message for initial server start
@@ -13,7 +21,7 @@
  
              while (this.running) {
                  final long tickStart = System.nanoTime(); // Paper - improve tick loop
-@@ -1844,6 +_,8 @@
+@@ -1844,6 +1840,8 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          if (false) while (!this.processQueue.isEmpty()) { // Folia - region threading
              this.processQueue.remove().run();
          }
@@ -22,7 +30,7 @@
  
          this.updateEffectiveRespawnData();
  
-@@ -1994,7 +_,7 @@
+@@ -1994,7 +1992,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
      }
  
      public String getServerModName() {
@@ -31,7 +39,7 @@
      }
  
      public ServerClockManager clockManager() {
-@@ -2311,6 +_,13 @@
+@@ -2311,6 +2309,13 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          return 256;
      }
  

@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/levelgen/NoiseSettings.java b/net/minecraft/world/level/levelgen/NoiseSettings.java
+index 37bd3210ecad3160f57170673d4dc805ce90e703..ab9cdb3b20505380ffbcfad38be34c4d7e117015 100644
 --- a/net/minecraft/world/level/levelgen/NoiseSettings.java
 +++ b/net/minecraft/world/level/levelgen/NoiseSettings.java
-@@ -8,7 +_,61 @@
+@@ -8,7 +8,61 @@ import net.minecraft.core.QuartPos;
  import net.minecraft.world.level.LevelHeightAccessor;
  import net.minecraft.world.level.dimension.DimensionType;
  
@@ -63,7 +71,7 @@
      public static final Codec<NoiseSettings> CODEC = RecordCodecBuilder.<NoiseSettings>create(
              i -> i.group(
                      Codec.intRange(DimensionType.MIN_Y, DimensionType.MAX_Y).fieldOf("min_y").forGetter(NoiseSettings::minY),
-@@ -44,11 +_,11 @@
+@@ -44,11 +98,11 @@ public record NoiseSettings(int minY, int height, int noiseSizeHorizontal, int n
      }
  
      public int getCellHeight() {

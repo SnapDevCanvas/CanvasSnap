@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/item/MaceItem.java b/net/minecraft/world/item/MaceItem.java
+index 681ef7b4f6f987b1779859ed1d9bcd6e5670adab..d68b59eeceb53c6ab6ea7186bdeec16c77f6237e 100644
 --- a/net/minecraft/world/item/MaceItem.java
 +++ b/net/minecraft/world/item/MaceItem.java
-@@ -105,7 +_,7 @@
+@@ -105,7 +105,7 @@ public class MaceItem extends Item {
  
              double fallHeightThreshold1 = 3.0;
              double fallHeightThreshold2 = 8.0;

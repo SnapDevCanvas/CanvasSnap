@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/server/commands/EnchantCommand.java b/net/minecraft/server/commands/EnchantCommand.java
+index 129db1b3368b08b2dea943f5417bb984fb075f1e..372996032ecca12cbfa758594ede3bfc5f7f6d5f 100644
 --- a/net/minecraft/server/commands/EnchantCommand.java
 +++ b/net/minecraft/server/commands/EnchantCommand.java
-@@ -67,8 +_,8 @@
+@@ -67,8 +67,8 @@ public class EnchantCommand {
          final CommandSourceStack source, final Collection<? extends Entity> targets, final Holder<Enchantment> enchantmentHolder, final int level
      ) throws CommandSyntaxException {
          Enchantment enchantment = enchantmentHolder.value();
@@ -11,7 +19,7 @@
          }
  
          // Canvas start - region threading
-@@ -88,8 +_,10 @@
+@@ -88,8 +88,10 @@ public class EnchantCommand {
              if (entity instanceof LivingEntity target) {
                  ItemStack item = target.getMainHandItem();
                  if (!item.isEmpty()) {

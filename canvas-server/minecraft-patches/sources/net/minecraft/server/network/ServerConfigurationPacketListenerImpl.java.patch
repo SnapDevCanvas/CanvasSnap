@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/server/network/ServerConfigurationPacketListenerImpl.java b/net/minecraft/server/network/ServerConfigurationPacketListenerImpl.java
+index f017068b9828509c7bbb2d60aaaee9a5ea047a9f..c51c8ef8f9c62eb644c8690ba9541c6100d03f80 100644
 --- a/net/minecraft/server/network/ServerConfigurationPacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerConfigurationPacketListenerImpl.java
-@@ -54,6 +_,7 @@
+@@ -54,6 +54,7 @@ public class ServerConfigurationPacketListenerImpl extends ServerCommonPacketLis
      private @Nullable PrepareSpawnTask prepareSpawnTask;
      public io.papermc.paper.connection.PaperPlayerConfigurationConnection paperConnection; // Paper
      public net.minecraft.server.level.ServerPlayer switchToMain; // Folia - region threading - rewrite login process
@@ -8,7 +16,7 @@
  
      public ServerConfigurationPacketListenerImpl(final MinecraftServer server, final Connection connection, final CommonListenerCookie cookie) {
          super(server, connection, cookie);
-@@ -193,9 +_,32 @@
+@@ -193,9 +194,32 @@ public class ServerConfigurationPacketListenerImpl extends ServerCommonPacketLis
  
      @Override
      public void handleConfigurationFinished(final ServerboundFinishConfigurationPacket packet) {

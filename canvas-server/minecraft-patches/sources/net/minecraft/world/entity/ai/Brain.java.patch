@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/ai/Brain.java b/net/minecraft/world/entity/ai/Brain.java
+index e097bc1268b4050e3948413c52dea69950858458..80637fc864b209fd10184022eb0a88d1eee20c5e 100644
 --- a/net/minecraft/world/entity/ai/Brain.java
 +++ b/net/minecraft/world/entity/ai/Brain.java
-@@ -37,16 +_,34 @@
+@@ -37,16 +37,34 @@ import org.jspecify.annotations.Nullable;
  
  public class Brain<E extends LivingEntity> {
      private static final int SCHEDULE_UPDATE_DELAY = 20;
@@ -42,7 +50,7 @@
  
      public static <E extends LivingEntity> Brain.Provider<E> provider(final Collection<? extends SensorType<? extends Sensor<? super E>>> sensorTypes) {
          return new Brain.Provider<>(ImmutableList.of(), sensorTypes, var0 -> List.of());
-@@ -99,10 +_,12 @@
+@@ -99,10 +117,12 @@ public class Brain<E extends LivingEntity> {
  
          this.setCoreActivities(ImmutableSet.of(Activity.CORE));
          this.useDefaultActivity();
@@ -55,7 +63,7 @@
      }
  
      public Brain() {
-@@ -153,11 +_,19 @@
+@@ -153,11 +173,19 @@ public class Brain<E extends LivingEntity> {
  
      public void clearMemories() {
          this.memories.values().forEach(MemorySlot::clear);
@@ -75,7 +83,7 @@
              slot.clear();
          }
      }
-@@ -191,8 +_,18 @@
+@@ -191,8 +219,18 @@ public class Brain<E extends LivingEntity> {
              }
  
              if (value == null) {
@@ -94,7 +102,7 @@
                  slot.set(value, tileToLive);
              }
          }
-@@ -206,8 +_,18 @@
+@@ -206,8 +244,18 @@ public class Brain<E extends LivingEntity> {
              }
  
              if (value == null) {
@@ -113,7 +121,7 @@
                  slot.set(value);
              }
          }
-@@ -367,15 +_,18 @@
+@@ -367,15 +415,18 @@ public class Brain<E extends LivingEntity> {
              }
  
              this.availableBehaviorsByPriority
@@ -134,7 +142,7 @@
      }
  
      public boolean isActive(final Activity activity) {
-@@ -396,48 +_,111 @@
+@@ -396,48 +447,111 @@ public class Brain<E extends LivingEntity> {
      }
  
      private void forgetOutdatedMemories() {
@@ -160,17 +168,15 @@
 -            // avoid calling getGameTime, as this may be called while portalling an entity - which will cause
 -            // the world data retrieval to fail
 -            return;
--        }
++        // Leaf start - optimize brain
++        if (this.availableBehaviorsByPriorityArray.length != this.availableBehaviorsByPriority.size()) {
++            this.availableBehaviorsByPriorityArray = this.availableBehaviorsByPriority.values().toArray(EMPTY_MAP_ARRAY);
+         }
 -        // Folia end - region threading
 -        long timestamp = body.level().getGameTime();
 -
 -        for (BehaviorControl<? super E> behavior : behaviors) { // Folia - region threading
 -            behavior.doStop(level, body, timestamp);
--        }
-+        // Leaf start - optimize brain
-+        if (this.availableBehaviorsByPriorityArray.length != this.availableBehaviorsByPriority.size()) {
-+            this.availableBehaviorsByPriorityArray = this.availableBehaviorsByPriority.values().toArray(EMPTY_MAP_ARRAY);
-+        }
 +        for (Map<Activity, Set<BehaviorControl<? super E>>> map : availableBehaviorsByPriorityArray) {
 +            var map1 = (io.canvasmc.canvas.util.map.ActivityArrayMap<Set<BehaviorControl<? super E>>>) map;
 +            for (int index = 0, size = map1.size(); index < size; index++) {
@@ -184,7 +190,7 @@
 +                    }
 +                }
 +            }
-+        }
+         }
 +        // Leaf end - optimize brain
      }
  
@@ -199,10 +205,6 @@
 -                        if (behavior.getStatus() == Behavior.Status.STOPPED) {
 -                            behavior.tryStart(level, body, time);
 -                        }
--                    }
--                }
--            }
--        }
 +        // Leaf start - optimize brain
 +        if (this.availableBehaviorsByPriorityArray.length != this.availableBehaviorsByPriority.size()) {
 +            this.availableBehaviorsByPriorityArray = this.availableBehaviorsByPriority.values().toArray(EMPTY_MAP_ARRAY);
@@ -216,16 +218,16 @@
 +                for (int index = 0; index < io.canvasmc.canvas.util.map.ActivityBitSet.ACTIVITY_SIZE; index++) {
 +                    if ((activeSet & (1 << index)) == 0) {
 +                        continue;
-+                    }
+                     }
 +                    var ele = ((io.canvasmc.canvas.util.map.ActivityArrayMap<Set<BehaviorControl<? super E>>>) map).getValue(index);
 +                    if (ele == null) {
 +                        continue;
 +                    }
 +                    list.add((io.canvasmc.canvas.util.map.BehaviorControlArraySet<? super E>) ele);
-+                }
-+            }
+                 }
+             }
 +            activeBehaviors = it.unimi.dsi.fastutil.objects.ObjectArrays.setLength(list.elements(), list.size());
-+        }
+         }
 +        for (int index = 0, size = activeBehaviors.length; index < size; index++) {
 +            if (index >= activeBehaviors.length) break; // Canvas - ensure bounds are kept, odd race condition that makes activeBehaviors empty during iteration of this
 +            var behaviorControls = activeBehaviors[index];
@@ -247,7 +249,6 @@
  
 -        for (BehaviorControl<? super E> behavior : this.getRunningBehaviors()) {
 -            behavior.tickOrStop(level, body, timestamp);
--        }
 +        // Leaf start - optimize brain
 +        if (this.availableBehaviorsByPriorityArray.length != this.availableBehaviorsByPriority.size()) {
 +            this.availableBehaviorsByPriorityArray = this.availableBehaviorsByPriority.values().toArray(new Map[0]);
@@ -270,7 +271,7 @@
 +                    }
 +                }
 +            }
-+        }
+         }
 +        // Leaf end - optimize brain
      }
  

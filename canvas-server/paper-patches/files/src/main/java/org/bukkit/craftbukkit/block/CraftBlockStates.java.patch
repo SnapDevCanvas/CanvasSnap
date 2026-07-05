@@ -1,6 +1,14 @@
+From b0840d0ded3da0cb50eed09ce213e6989cfd2cc7 Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas paperServer File Patches
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockStates.java b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockStates.java
+index b1baeab3d2218fd38c60c2a4564b48960b8e956f..fe1050de3a4bff1c90fde145b43017ace741c6ec 100644
 --- a/src/main/java/org/bukkit/craftbukkit/block/CraftBlockStates.java
 +++ b/src/main/java/org/bukkit/craftbukkit/block/CraftBlockStates.java
-@@ -187,7 +_,7 @@
+@@ -187,7 +187,7 @@ public final class CraftBlockStates {
      }
  
      public static BlockState getBlockState(Block block) {

@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/server/network/ServerCommonPacketListenerImpl.java b/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
+index a13d8da418722b76b258016335d1095074756bee..ee94cd5a0f6e06f6fa7511ec9413bea318b9d218 100644
 --- a/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerCommonPacketListenerImpl.java
-@@ -303,11 +_,48 @@
+@@ -303,11 +303,48 @@ public abstract class ServerCommonPacketListenerImpl implements ServerCommonPack
      }
      // Canvas end - optimize flush calls with region threading
  

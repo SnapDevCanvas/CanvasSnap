@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/projectile/FishingHook.java b/net/minecraft/world/entity/projectile/FishingHook.java
+index cb4a2efb90eef13d74be3f8a755a240625d5a659..7e7d88a9ce1cff9eecafa978a83b704a92e9f4fb 100644
 --- a/net/minecraft/world/entity/projectile/FishingHook.java
 +++ b/net/minecraft/world/entity/projectile/FishingHook.java
-@@ -508,6 +_,11 @@
+@@ -508,6 +508,11 @@ public class FishingHook extends Projectile {
          if (!this.level().isClientSide() && owner != null && !this.shouldStopFishing(owner)) {
              int dmg = 0;
              if (this.hookedIn != null) {
@@ -12,7 +20,7 @@
                  // CraftBukkit start
                  org.bukkit.event.player.PlayerFishEvent playerFishEvent = new org.bukkit.event.player.PlayerFishEvent((org.bukkit.entity.Player) owner.getBukkitEntity(), this.hookedIn.getBukkitEntity(), (org.bukkit.entity.FishHook) this.getBukkitEntity(), org.bukkit.craftbukkit.CraftEquipmentSlot.getHand(hand), org.bukkit.event.player.PlayerFishEvent.State.CAUGHT_ENTITY); // Paper - Add hand parameter to PlayerFishEvent
                  if (!playerFishEvent.callEvent()) {
-@@ -601,6 +_,14 @@
+@@ -601,6 +606,14 @@ public class FishingHook extends Projectile {
          if (owner != null) {
              Vec3 delta = new Vec3(owner.getX() - this.getX(), owner.getY() - this.getY(), owner.getZ() - this.getZ()).scale(0.1);
              entity.setDeltaMovement(entity.getDeltaMovement().add(delta));

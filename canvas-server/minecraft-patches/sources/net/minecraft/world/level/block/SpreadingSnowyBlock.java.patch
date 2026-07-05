@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/block/SpreadingSnowyBlock.java b/net/minecraft/world/level/block/SpreadingSnowyBlock.java
+index c3a564e8b5765b35f1ff95acf7510654b1488e89..304aceafd86c313ed0315c326090220eaca3afa6 100644
 --- a/net/minecraft/world/level/block/SpreadingSnowyBlock.java
 +++ b/net/minecraft/world/level/block/SpreadingSnowyBlock.java
-@@ -64,7 +_,7 @@
+@@ -64,7 +64,7 @@ public abstract class SpreadingSnowyBlock extends SnowyBlock {
          Optional<Block> baseBlock = blocks.getOptional(this.baseBlock);
          if (!baseBlock.isEmpty()) {
              // Paper start - Perf: optimize dirt and snow spreading
@@ -9,7 +17,7 @@
              if (cachedChunk == null) { // Is this needed?
                  return;
              }
-@@ -78,24 +_,27 @@
+@@ -78,24 +78,27 @@ public abstract class SpreadingSnowyBlock extends SnowyBlock {
                  // CraftBukkit end
                  level.setBlockAndUpdate(pos, baseBlock.get().defaultBlockState());
              } else {

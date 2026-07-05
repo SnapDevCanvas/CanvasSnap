@@ -1,6 +1,14 @@
+From b0840d0ded3da0cb50eed09ce213e6989cfd2cc7 Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas paperServer File Patches
+
+
+diff --git a/src/main/java/io/papermc/paper/world/saveddata/PaperLevelOverrides.java b/src/main/java/io/papermc/paper/world/saveddata/PaperLevelOverrides.java
+index 0aba139ace05262464ed79bdbf6a7772964baebf..c290e45203e4de5aa628779be2dee7e807f14979 100644
 --- a/src/main/java/io/papermc/paper/world/saveddata/PaperLevelOverrides.java
 +++ b/src/main/java/io/papermc/paper/world/saveddata/PaperLevelOverrides.java
-@@ -28,7 +_,8 @@
+@@ -28,7 +28,8 @@ public final class PaperLevelOverrides extends SavedData implements ServerLevelD
          Codec.LONG.fieldOf("game_time").forGetter(levelOverrides -> levelOverrides.gameTime),
          Codec.BOOL.fieldOf("initialized").forGetter(levelOverrides -> levelOverrides.initialized),
          LEGACY_GAME_TYPE_CODEC.fieldOf("game_type").forGetter(levelOverrides -> levelOverrides.gameType),
@@ -10,7 +18,7 @@
      ).apply(instance, PaperLevelOverrides::new));
      public static final SavedDataType<PaperLevelOverrides> TYPE = new SavedDataType<>(
          Identifier.fromNamespaceAndPath(Identifier.PAPER_NAMESPACE, "level_overrides"),
-@@ -44,9 +_,10 @@
+@@ -44,9 +45,10 @@ public final class PaperLevelOverrides extends SavedData implements ServerLevelD
      private LevelSettings.DifficultySettings difficultySettings;
      private transient @Nullable PrimaryLevelData rootData;
      private transient ResourceKey<Level> dimension = Level.OVERWORLD;
@@ -22,7 +30,7 @@
      }
  
      private PaperLevelOverrides(
-@@ -54,13 +_,15 @@
+@@ -54,13 +56,15 @@ public final class PaperLevelOverrides extends SavedData implements ServerLevelD
          final long gameTime,
          final boolean initialized,
          final GameType gameType,
@@ -39,7 +47,7 @@
      }
  
      public static PaperLevelOverrides createFromLiveLevelData(final PrimaryLevelData rootData) {
-@@ -69,7 +_,8 @@
+@@ -69,7 +73,8 @@ public final class PaperLevelOverrides extends SavedData implements ServerLevelD
              rootData.getGameTime(),
              false,
              rootData.getGameType(),
@@ -49,7 +57,7 @@
          );
      }
  
-@@ -83,7 +_,8 @@
+@@ -83,7 +88,8 @@ public final class PaperLevelOverrides extends SavedData implements ServerLevelD
              levelData.get("Time").asLong(0L),
              levelData.get("initialized").asBoolean(true),
              GameType.byId(levelData.get("GameType").asInt(GameType.SURVIVAL.getId())),

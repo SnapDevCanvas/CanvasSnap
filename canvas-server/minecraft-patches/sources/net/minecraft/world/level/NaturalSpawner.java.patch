@@ -1,15 +1,21 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/NaturalSpawner.java b/net/minecraft/world/level/NaturalSpawner.java
+index 8864ab7cb6fd6b7206c524c9dbdd42507634c6a0..3795ad9bc5cce82805e7e0ca0486ec7669c173b2 100644
 --- a/net/minecraft/world/level/NaturalSpawner.java
 +++ b/net/minecraft/world/level/NaturalSpawner.java
-@@ -69,24 +_,49 @@
+@@ -69,24 +69,49 @@ public final class NaturalSpawner {
          final LocalMobCapCalculator localMobCapCalculator
      ) {
          // Paper start - Optional per player mob spawns
 -        return createState(spawnableChunkCount, entities, chunkGetter, localMobCapCalculator, false);
--    }
--
 +        return createState(spawnableChunkCount, localMobCapCalculator, false, io.papermc.paper.threadedregions.TickRegionScheduler.getCurrentRegionizedWorldData()); // Canvas - optimize natural spawning
-+    }
-+
+     }
+ 
 +    // Canvas start - optimize natural spawning
 +    private static int[] calculateLimits(final io.papermc.paper.threadedregions.RegionizedWorldData worldData, final int spawnableChunkCount) {
 +        int[] retVal = new int[SPAWNING_CATEGORIES.length];
@@ -59,7 +65,7 @@
                      // Paper start - Only count natural spawns
                      if (!entity.level().paperConfig().entities.spawning.countAllMobsForSpawning &&
                          !(entity.spawnReason == org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.NATURAL ||
-@@ -95,28 +_,44 @@
+@@ -95,28 +120,44 @@ public final class NaturalSpawner {
                      }
                      // Paper end - Only count natural spawns
                      BlockPos pos = entity.blockPosition();
@@ -83,11 +89,16 @@
                          if (mobSpawnCost != null) {
                              spawnPotential.addCharge(entity.blockPosition(), mobSpawnCost.charge());
                          }
--
++                    }
+ 
 -                        if (localMobCapCalculator != null && entity instanceof Mob) { // Paper - Optional per player mob spawns
 -                            localMobCapCalculator.addMob(chunk.getPos(), category);
 -                        }
--
++                    // only runs if we are not doing per-player
++                    if (localMobCapCalculator != null && entity instanceof Mob) {
++                        localMobCapCalculator.addMob(chunk.getPos(), category);
++                    }
+ 
 -                        mobCounts.addTo(category, 1);
 -                        // Paper start - Optional per player mob spawns
 -                        if (countMobs) {
@@ -95,13 +106,6 @@
 -                        }
 -                        // Paper end - Optional per player mob spawns
 -                    });
-+                    }
-+
-+                    // only runs if we are not doing per-player
-+                    if (localMobCapCalculator != null && entity instanceof Mob) {
-+                        localMobCapCalculator.addMob(chunk.getPos(), category);
-+                    }
-+
 +                    mobCounts.addTo(category, 1);
 +                    // Paper start - Optional per player mob spawns
 +                    if (countMobs) {
@@ -118,7 +122,7 @@
      }
  
      private static Biome getRoughBiome(final BlockPos pos, final ChunkAccess chunk) {
-@@ -157,6 +_,11 @@
+@@ -157,6 +198,11 @@ public final class NaturalSpawner {
      public static void spawnForChunk(
          final ServerLevel level, final LevelChunk chunk, final NaturalSpawner.SpawnState state, final List<MobCategory> spawningCategories
      ) {
@@ -130,7 +134,7 @@
          for (MobCategory mobCategory : spawningCategories) {
              // Paper start - Optional per player mob spawns
              final boolean canSpawn;
-@@ -171,12 +_,17 @@
+@@ -171,12 +217,17 @@ public final class NaturalSpawner {
  
                  // Apply per-player limit
                  int minDiff = Integer.MAX_VALUE;
@@ -151,7 +155,7 @@
                      }
                  }
  
-@@ -186,8 +_,10 @@
+@@ -186,8 +237,10 @@ public final class NaturalSpawner {
                  canSpawn = state.canSpawnForCategoryLocal(mobCategory, chunk.getPos());
              }
              if (canSpawn) {
@@ -164,12 +168,13 @@
                  // Paper end - Optional per player mob spawns
              }
          }
-@@ -203,31 +_,34 @@
+@@ -203,31 +256,34 @@ public final class NaturalSpawner {
      }
      // Paper end - Add mobcaps commands
  
--    public static void spawnCategoryForChunk(
--        final MobCategory mobCategory,
++    // Canvas start - optimize natural spawning
+     public static void spawnCategoryForChunk(
+         final MobCategory mobCategory,
 -        final ServerLevel level,
 -        final LevelChunk chunk,
 -        final NaturalSpawner.SpawnPredicate extraTest,
@@ -181,9 +186,6 @@
 -    public static void spawnCategoryForChunk(
 -        final MobCategory mobCategory,
 -        final ServerLevel level,
-+    // Canvas start - optimize natural spawning
-+    public static void spawnCategoryForChunk(
-+        final MobCategory mobCategory,
 +        final SpawnState spawnState,
          final LevelChunk chunk,
          final NaturalSpawner.SpawnPredicate extraTest,
@@ -217,15 +219,14 @@
  
      @VisibleForDebug
      public static void spawnCategoryForPosition(final MobCategory mobCategory, final ServerLevel level, final BlockPos start) {
-@@ -242,61 +_,94 @@
+@@ -242,61 +298,94 @@ public final class NaturalSpawner {
          final NaturalSpawner.SpawnPredicate extraTest,
          final NaturalSpawner.AfterSpawnCallback spawnCallback
      ) {
 -        // Paper start - Optional per player mob spawns
 -        spawnCategoryForPosition(mobCategory, level, chunk, start, extraTest, spawnCallback, Integer.MAX_VALUE, null);
--    }
 +        throw new UnsupportedOperationException(); // Canvas - optimize natural spawning
-+    }
+     }
 +    // Canvas start - optimize natural spawning
 +
 +    private static int clamp(final int val, final int min, final int max) {
@@ -330,7 +331,7 @@
                              // Paper start - per player mob count backoff
                              if (doSpawning == PreSpawnStatus.ABORT || doSpawning == PreSpawnStatus.CANCELLED) {
                                  level.getChunkSource().chunkMap.updateFailurePlayerMobTypeMap(pos.getX() >> 4, pos.getZ() >> 4, mobCategory);
-@@ -313,7 +_,7 @@
+@@ -313,7 +402,7 @@ public final class NaturalSpawner {
                                      return;
                                  }
  
@@ -339,7 +340,7 @@
                                  if (isValidPositionForMob(level, mob, nearestPlayerDistanceSqr)) {
                                      groupData = mob.finalizeSpawn(
                                          level, level.getCurrentDifficultyAt(mob.blockPosition()), EntitySpawnReason.NATURAL, groupData
-@@ -361,8 +_,12 @@
+@@ -361,8 +450,12 @@ public final class NaturalSpawner {
              return false;
          }
  
@@ -354,7 +355,7 @@
      }
  
      // Paper start - PreCreatureSpawnEvent
-@@ -380,6 +_,8 @@
+@@ -380,6 +473,8 @@ public final class NaturalSpawner {
          final ChunkGenerator generator,
          final MobSpawnSettings.SpawnerData currentSpawnData,
          final BlockPos.MutableBlockPos pos,
@@ -363,7 +364,7 @@
          final double nearestPlayerDistanceSqr
      ) {
          // Paper start - PreCreatureSpawnEvent
-@@ -398,9 +_,9 @@
+@@ -398,9 +493,9 @@ public final class NaturalSpawner {
          // Paper end - PreCreatureSpawnEvent
              && (type.canSpawnFarFromPlayer() || !(nearestPlayerDistanceSqr > type.getCategory().getDespawnDistance() * type.getCategory().getDespawnDistance()))
              && type.canSummon()
@@ -375,7 +376,7 @@
              && level.noCollision(type.getSpawnAABB(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5));
          return success ? PreSpawnStatus.SUCCESS : PreSpawnStatus.FAIL; // Paper - PreCreatureSpawnEvent
      }
-@@ -430,47 +_,47 @@
+@@ -430,47 +525,47 @@ public final class NaturalSpawner {
      }
  
      private static Optional<MobSpawnSettings.SpawnerData> getRandomSpawnMobAt(
@@ -433,7 +434,7 @@
              Structure fortress = structureManager.registryAccess().lookupOrThrow(Registries.STRUCTURE).getValue(BuiltinStructures.FORTRESS);
              return fortress != null && structureManager.getStructureAt(pos, fortress).isValid();
          } else {
-@@ -617,18 +_,22 @@
+@@ -617,18 +712,22 @@ public final class NaturalSpawner {
          private @Nullable BlockPos lastCheckedPos;
          private @Nullable EntityType<?> lastCheckedType;
          private double lastCharge;

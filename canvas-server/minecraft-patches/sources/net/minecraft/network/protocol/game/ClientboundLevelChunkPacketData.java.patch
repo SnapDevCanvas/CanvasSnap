@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/network/protocol/game/ClientboundLevelChunkPacketData.java b/net/minecraft/network/protocol/game/ClientboundLevelChunkPacketData.java
+index a52f93d0563f713b1d2b707cdb6ab74e4793a54d..fbfaff3bb36d8c594a549cb2eb19b30a58cbcf60 100644
 --- a/net/minecraft/network/protocol/game/ClientboundLevelChunkPacketData.java
 +++ b/net/minecraft/network/protocol/game/ClientboundLevelChunkPacketData.java
-@@ -61,17 +_,17 @@
+@@ -61,17 +61,17 @@ public class ClientboundLevelChunkPacketData {
          this.blockEntitiesData = Lists.newArrayList();
          int totalTileEntities = 0; // Paper - Handle oversized block entities in chunks
  

@@ -1,6 +1,14 @@
+From b0840d0ded3da0cb50eed09ce213e6989cfd2cc7 Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas paperServer File Patches
+
+
+diff --git a/src/main/java/org/bukkit/craftbukkit/CraftChunk.java b/src/main/java/org/bukkit/craftbukkit/CraftChunk.java
+index f020f310c4bca49a23de91bea72ccd9941c0b03c..ed7996c8eb8132f2cadcb6b07f09accf139a8680 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftChunk.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftChunk.java
-@@ -134,10 +_,13 @@
+@@ -134,10 +134,13 @@ public class CraftChunk implements Chunk {
          int index = 0;
          ChunkAccess chunk = this.getHandle(ChunkStatus.FULL);
  
@@ -17,7 +25,7 @@
  
          return states;
      }
-@@ -152,8 +_,11 @@
+@@ -152,8 +155,11 @@ public class CraftChunk implements Chunk {
          ChunkAccess chunk = this.getHandle(ChunkStatus.FULL);
  
          List<BlockState> states = new ArrayList<>();

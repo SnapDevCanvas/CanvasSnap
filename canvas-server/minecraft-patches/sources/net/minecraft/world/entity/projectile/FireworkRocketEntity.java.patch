@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/projectile/FireworkRocketEntity.java b/net/minecraft/world/entity/projectile/FireworkRocketEntity.java
+index dafb6c76a4b2d8c0a3fa9405c563e0ab9319584e..bb01509a2c8ae41b53cd10a477510c4661856b12 100644
 --- a/net/minecraft/world/entity/projectile/FireworkRocketEntity.java
 +++ b/net/minecraft/world/entity/projectile/FireworkRocketEntity.java
-@@ -126,6 +_,23 @@
+@@ -126,6 +126,23 @@ public class FireworkRocketEntity extends Projectile implements ItemSupplier {
          super.inactiveTick();
      }
      // Paper end - EAR 2
@@ -24,7 +32,7 @@
  
      @Override
      public void tick() {
-@@ -147,7 +_,7 @@
+@@ -147,7 +164,7 @@ public class FireworkRocketEntity extends Projectile implements ItemSupplier {
  
              if (this.attachedToEntity != null) {
                  Vec3 handAngle;

@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/ai/goal/RangedBowAttackGoal.java b/net/minecraft/world/entity/ai/goal/RangedBowAttackGoal.java
+index 50f12f2581267827c394134cd51a09016a5fa2b0..d9de7266e9bf2c5e9132301dbc0873b751cc6ca9 100644
 --- a/net/minecraft/world/entity/ai/goal/RangedBowAttackGoal.java
 +++ b/net/minecraft/world/entity/ai/goal/RangedBowAttackGoal.java
-@@ -116,6 +_,7 @@
+@@ -116,6 +116,7 @@ public class RangedBowAttackGoal<T extends Monster & RangedAttackMob> extends Go
                  }
  
                  this.mob.lookAt(target, 30.0F, 30.0F);

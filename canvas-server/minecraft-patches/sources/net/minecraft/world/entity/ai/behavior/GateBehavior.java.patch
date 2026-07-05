@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/ai/behavior/GateBehavior.java b/net/minecraft/world/entity/ai/behavior/GateBehavior.java
+index 3adfb334068d3722329f91011c41d5e59b1956c9..c8533cd45c83b01a46f452c55a6b9f51025ebb3c 100644
 --- a/net/minecraft/world/entity/ai/behavior/GateBehavior.java
 +++ b/net/minecraft/world/entity/ai/behavior/GateBehavior.java
-@@ -85,7 +_,17 @@
+@@ -85,7 +85,17 @@ public class GateBehavior<E extends LivingEntity> implements BehaviorControl<E>
              }
          }
          // Paper end - Perf: Remove streams from hot code

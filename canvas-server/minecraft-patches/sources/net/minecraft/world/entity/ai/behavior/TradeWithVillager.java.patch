@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/ai/behavior/TradeWithVillager.java b/net/minecraft/world/entity/ai/behavior/TradeWithVillager.java
+index 736ad21b73a19113c6f0f3bce6aa1cc0a41485a8..1eae6a24066ee58e4fa378f8892b4c186250a538 100644
 --- a/net/minecraft/world/entity/ai/behavior/TradeWithVillager.java
 +++ b/net/minecraft/world/entity/ai/behavior/TradeWithVillager.java
-@@ -73,7 +_,17 @@
+@@ -73,7 +73,17 @@ public class TradeWithVillager extends Behavior<Villager> {
      private static Set<Item> figureOutWhatIAmWillingToTrade(final Villager myBody, final Villager target) {
          ImmutableSet<Item> targetItems = target.getVillagerData().profession().value().requestedItems();
          ImmutableSet<Item> selfItems = myBody.getVillagerData().profession().value().requestedItems();

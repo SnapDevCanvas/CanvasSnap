@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/ai/behavior/InsideBrownianWalk.java b/net/minecraft/world/entity/ai/behavior/InsideBrownianWalk.java
+index b57a48842e31f678de4dcef689a4c9dcf9dd66af..69104bfed2c8b1ab6c437c7ec27729de7d49a528 100644
 --- a/net/minecraft/world/entity/ai/behavior/InsideBrownianWalk.java
 +++ b/net/minecraft/world/entity/ai/behavior/InsideBrownianWalk.java
-@@ -21,16 +_,50 @@
+@@ -21,16 +21,50 @@ public class InsideBrownianWalk {
                          }
  
                          BlockPos bodyPos = body.blockPosition();

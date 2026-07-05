@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/InsideBlockEffectApplier.java b/net/minecraft/world/entity/InsideBlockEffectApplier.java
+index fc7cfc75e3e5c274f01498e4afd8693236b4e394..f6b6edb7d7c283cb82b8f1569d7f20ed4653fa6a 100644
 --- a/net/minecraft/world/entity/InsideBlockEffectApplier.java
 +++ b/net/minecraft/world/entity/InsideBlockEffectApplier.java
-@@ -30,20 +_,27 @@
+@@ -30,20 +30,27 @@ public interface InsideBlockEffectApplier {
      void runAfter(InsideBlockEffectType type, Consumer<Entity> effect);
  
      class StepBasedCollector implements InsideBlockEffectApplier {
@@ -39,7 +47,7 @@
              if (this.lastStep != step) {
                  this.lastStep = step;
                  this.flushStep();
-@@ -53,46 +_,83 @@
+@@ -53,46 +60,83 @@ public interface InsideBlockEffectApplier {
          public void applyAndClear(final Entity entity) {
              this.flushStep();
  
@@ -67,13 +75,9 @@
                  if (!entity.isAlive()) {
                      break;
                  }
--
--                effect.accept(entity);
--            }
--
--            this.finalEffects.clear();
 +            }
-+
+ 
+-                effect.accept(entity);
 +            if (entity.isAlive()) {
 +                for (; i < size; i++) {
 +                    effects.get(i).accept(entity);
@@ -81,8 +85,9 @@
 +                        break;
 +                    }
 +                }
-+            }
-+
+             }
+ 
+-            this.finalEffects.clear();
 +            effects.clear();
              this.lastStep = -1;
          }
@@ -94,11 +99,6 @@
 -                beforeEffects.clear();
 -                if (this.effectsInStep.remove(type) instanceof final Consumer<Entity> recordedEffect) { // Paper - track position inside effect was triggered on - better than null check to avoid diff.
 -                    this.finalEffects.add(recordedEffect); // Paper - track position inside effect was triggered on
--                }
--
--                List<Consumer<Entity>> afterEffects = this.afterEffectsInStep.get(type);
--                this.finalEffects.addAll(afterEffects);
--                afterEffects.clear();
 +            final int len = APPLY_ORDER.length;
 +            final Consumer<Entity>[] effectArr = this.effectsInStep;
 +            final List<Consumer<Entity>> finalList = this.finalEffects;
@@ -108,8 +108,11 @@
 +                if (!beforeList.isEmpty()) {
 +                    finalList.addAll(beforeList);
 +                    beforeList.clear();
-+                }
-+
+                 }
+ 
+-                List<Consumer<Entity>> afterEffects = this.afterEffectsInStep.get(type);
+-                this.finalEffects.addAll(afterEffects);
+-                afterEffects.clear();
 +                Consumer<Entity> effect = effectArr[i];
 +                if (effect != null) {
 +                    finalList.add(effect);
@@ -143,7 +146,7 @@
          }
  
          // Paper start - track position inside effect was triggered on
-@@ -113,5 +_,6 @@
+@@ -113,5 +157,6 @@ public interface InsideBlockEffectApplier {
              }
          }
          // Paper end - track position inside effect was triggered on

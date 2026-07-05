@@ -26,9 +26,10 @@
 +
  paperweight {
      minecraftVersion = providers.gradleProperty("mcVersion")
+-    gitFilePatches = false
 +    filterPatches = false
-     gitFilePatches = false
- 
++    gitFilePatches = true
++
 +    val canvas = forks.register("canvas") {
 +        additionalAts.set(mergeMinecraftATs.flatMap { it.outputFile })
 +        upstream.patchDir("paperServer") {
@@ -40,10 +41,10 @@
 +    }
 +
 +    activeFork = canvas
-+
+ 
      updatingMinecraft {
          // oldPaperCommit = "d4fe85375af18bfa88f44d7c1e6a61904ae550cc"
-+        // oldForkCommit = "58d6715718521ea774b786fa9ca1e6fc2db14702"
++        oldForkCommit = "4920e9860aee81d084d52b830c967aa208dd09c6"
      }
  }
  

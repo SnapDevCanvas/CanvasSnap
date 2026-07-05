@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/storage/LevelData.java b/net/minecraft/world/level/storage/LevelData.java
+index 7f46f4529de72f2a0e3b38c4a8a401d3fee93829..85200e9ae711e8f5d9decab411e62f9360b440bd 100644
 --- a/net/minecraft/world/level/storage/LevelData.java
 +++ b/net/minecraft/world/level/storage/LevelData.java
-@@ -31,7 +_,7 @@
+@@ -31,7 +31,7 @@ public interface LevelData {
      }
  
      record RespawnData(GlobalPos globalPos, float yaw, float pitch) {

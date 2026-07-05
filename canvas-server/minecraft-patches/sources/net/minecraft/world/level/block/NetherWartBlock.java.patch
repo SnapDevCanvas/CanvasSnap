@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/block/NetherWartBlock.java b/net/minecraft/world/level/block/NetherWartBlock.java
+index c9cfc3096e6fb04493f906e0f6cb70cda3648a4a..b3788bc76ec54546b9040ffea01f06e7756af13a 100644
 --- a/net/minecraft/world/level/block/NetherWartBlock.java
 +++ b/net/minecraft/world/level/block/NetherWartBlock.java
-@@ -17,7 +_,7 @@
+@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
  import net.minecraft.world.phys.shapes.CollisionContext;
  import net.minecraft.world.phys.shapes.VoxelShape;
  
@@ -9,7 +17,7 @@
      public static final MapCodec<NetherWartBlock> CODEC = simpleCodec(NetherWartBlock::new);
      public static final int MAX_AGE = 3;
      public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
-@@ -66,4 +_,48 @@
+@@ -66,4 +66,48 @@ public class NetherWartBlock extends VegetationBlock {
      protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder) {
          builder.add(AGE);
      }

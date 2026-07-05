@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/level/levelgen/Beardifier.java b/net/minecraft/world/level/levelgen/Beardifier.java
+index 6781da6102df878da9db986f2687fbc47efcc8be..61a1d1086b66dfc3e1b2ecb36ff79b164771a13e 100644
 --- a/net/minecraft/world/level/levelgen/Beardifier.java
 +++ b/net/minecraft/world/level/levelgen/Beardifier.java
-@@ -34,6 +_,15 @@
+@@ -34,6 +34,15 @@ public class Beardifier implements DensityFunctions.BeardifierOrMarker {
      private final List<Beardifier.Rigid> pieces;
      private final List<JigsawJunction> junctions;
      private final @Nullable BoundingBox affectedBox;
@@ -16,7 +24,7 @@
  
      public static Beardifier forStructuresInChunk(final StructureManager structureManager, final ChunkPos chunkPos) {
          List<StructureStart> structureStarts = structureManager.startsForStructure(chunkPos, s -> s.terrainAdaptation() != TerrainAdjustment.NONE);
-@@ -109,6 +_,54 @@
+@@ -109,6 +118,54 @@ public class Beardifier implements DensityFunctions.BeardifierOrMarker {
  
      @Override
      public double compute(final DensityFunction.FunctionContext context) {
@@ -71,7 +79,7 @@
          if (this.affectedBox == null) {
              return 0.0;
          }
-@@ -166,6 +_,16 @@
+@@ -166,6 +223,16 @@ public class Beardifier implements DensityFunctions.BeardifierOrMarker {
      }
  
      private static double getBuryContribution(final double dx, final double dy, final double dz) {

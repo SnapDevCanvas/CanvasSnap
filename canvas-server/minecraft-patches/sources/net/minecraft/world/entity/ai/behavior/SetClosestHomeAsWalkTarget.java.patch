@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/world/entity/ai/behavior/SetClosestHomeAsWalkTarget.java b/net/minecraft/world/entity/ai/behavior/SetClosestHomeAsWalkTarget.java
+index 5bd7473b0db1a87f905c01c19ddf99e3a447bcfa..583942e37b4b12c274904a20f6c84dc7252e5268 100644
 --- a/net/minecraft/world/entity/ai/behavior/SetClosestHomeAsWalkTarget.java
 +++ b/net/minecraft/world/entity/ai/behavior/SetClosestHomeAsWalkTarget.java
-@@ -58,11 +_,15 @@
+@@ -58,11 +58,15 @@ public class SetClosestHomeAsWalkTarget {
                                  batchCache.put(key, lastUpdate.longValue() + CACHE_TIMEOUT);
                                  return true;
                              };

@@ -1,6 +1,14 @@
+From 797ef1098eaaa50c9bf6a3ac86ebfa511db756df Mon Sep 17 00:00:00 2001
+From: File <noreply+automated@papermc.io>
+Date: Sun, 20 Apr 1997 15:37:42 +0200
+Subject: [PATCH] canvas File Patches
+
+
+diff --git a/net/minecraft/server/level/ChunkMap.java b/net/minecraft/server/level/ChunkMap.java
+index 0f354340cbafa303fb1dd11dd3d5908ed5d972f4..24fc17a33285d200ed6d793b3b42180c4e4ab3a5 100644
 --- a/net/minecraft/server/level/ChunkMap.java
 +++ b/net/minecraft/server/level/ChunkMap.java
-@@ -244,7 +_,7 @@
+@@ -244,7 +244,7 @@ public class ChunkMap extends SimpleRegionStorage implements ChunkHolder.PlayerP
  
          final int index = entity.getType().getCategory().ordinal();
          final ca.spottedleaf.moonrise.common.list.ReferenceList<ServerPlayer> inRange =
@@ -9,7 +17,7 @@
          if (inRange == null) {
              return;
          }
-@@ -650,7 +_,7 @@
+@@ -650,7 +650,7 @@ public class ChunkMap extends SimpleRegionStorage implements ChunkHolder.PlayerP
                  printFuture(holder.getEntityTickingChunkFuture()),
                  this.ticketStorage.getTicketDebugString(posKey, false),
                  this.anyPlayerCloseEnoughForSpawning(pos),
@@ -18,7 +26,7 @@
                  this.ticketStorage.getTicketDebugString(posKey, true),
                  this.distanceManager.getChunkLevel(posKey, true),
                  fullChunk.<Integer>map(levelChunk -> levelChunk.getBlockTicks().count()).orElse(0),
-@@ -1329,7 +_,7 @@
+@@ -1329,7 +1329,7 @@ public class ChunkMap extends SimpleRegionStorage implements ChunkHolder.PlayerP
                  double distanceSquared = deltaToPlayerX * deltaToPlayerX + deltaToPlayerZ * deltaToPlayerZ; // Paper
                  double rangeSquared = visibleRange * visibleRange;
                  // Paper start - Configurable entity tracking range by Y
@@ -27,7 +35,7 @@
                  if (visibleToPlayer && level.paperConfig().entities.trackingRangeY.enabled) {
                      double rangeY = level.paperConfig().entities.trackingRangeY.get(this.entity, -1);
                      if (rangeY != -1) {
-@@ -1347,7 +_,7 @@
+@@ -1347,7 +1347,7 @@ public class ChunkMap extends SimpleRegionStorage implements ChunkHolder.PlayerP
                  }
                  // Folia end - region threading
                  // CraftBukkit start - respect vanish API
