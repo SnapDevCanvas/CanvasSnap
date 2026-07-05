@@ -13,8 +13,9 @@ val canvasMavenPublicUrl = "https://maven.canvasmc.io/public/"
 
 paperweight {
     filterPatches = false
-    gitFilePatches = false
+    gitFilePatches = true
     upstreams.paper {
+        repo = github("SnapDevCanvas", "PaperSnap")
         ref = providers.gradleProperty("paperRef")
 
         patchFile {
